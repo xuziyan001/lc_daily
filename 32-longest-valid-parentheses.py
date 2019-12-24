@@ -10,7 +10,6 @@ class Solution:
             else:
                 if len(stack) == 0:
                     # 提前结束
-                    stack = []
                     last_fin_index = each
                     if current > max:
                         max = current
