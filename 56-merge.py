@@ -17,12 +17,7 @@ class Solution:
                     mmin = each[0]
                 if each[0] <= mmax <= each[1]:
                     mmax = each[1]
-            to_remove = []
-            for each in self.m:
-                if each[0] >= mmin and each[1] <= mmax:
-                    to_remove.append(each)
-            for each in to_remove:
-                self.m.remove(each)
+            self.m = list(filter(lambda x: x[0] < mmin or x[1] > mmax, self.m))
             self.m.append([mmin, mmax])
         return self.m
 

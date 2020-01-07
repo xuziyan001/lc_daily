@@ -6,6 +6,7 @@
 问总共有多少条不同的路径？
 """
 
+
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         if m <= 0 or n <= 0:
