@@ -1,3 +1,5 @@
+from functools import reduce
+from operator import add
 from typing import List
 
 
@@ -12,12 +14,55 @@ from typing import List
 
 """
 
+
 class Solution:
     def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
-        pass
+        res = []
+        line = ''
+        for word in words:
+            if len(line) + len(word) == maxWidth:
+                line += word
+                res.append(line)
+                line = ''
+            elif len(line) + len(word) < maxWidth:
+                line += word + ' '
+            else:
+                l = self.justify(line, maxWidth)
+                res.append(l)
+                line = word + ' '
+        line = line.strip()
+        if line:
+            res.append(line + ' ' * (maxWidth-len(line)))
+        return res
+
+    def justify(self, line: str, maxWidth: int) -> str:
+        l = line.strip().split(' ')
+        n = len(l)
+        count = reduce(add, [len(x) for x in l], 0)
+        if n == 1:
+            return l[0] + (maxWidth-count) * ' '
+        remain = maxWidth - count
+        i, j = divmod(remain, n-1)
+        for t in range(j):
+            l.insert(2*t+1, ' '*(i+1))
+        for t in range(j, n-1):
+            l.insert(2*t+1, ' '*i)
+        return ''.join(l)
 
 
 if __name__ == '__main__':
+    #words = ["This", "is", "an", "example", "of", "text", "justification."]
+    #words = ["What", "must", "be", "acknowledgment", "shall", "be"]
+    #maxWidth = 16
+    words = ["Science", "is", "what", "we", "understand", "well", "enough", "to", "explain",
+             "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"]
+    maxWidth = 20
+    l = Solution().fullJustify(words, maxWidth)
+    for each in l:
+        print(each)
     words = ["This", "is", "an", "example", "of", "text", "justification."]
-    maxWidth = 16
-    print(Solution().fullJustify(words, maxWidth))
+    maxWidth = 14
+    l = Solution().fullJustify(words, maxWidth)
+    for each in l:
+        print(each)
+        print(len(each))
