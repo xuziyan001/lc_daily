@@ -22,6 +22,27 @@ class TreeNode:
         self.left = None
         self.right = None
 
+    def __str__(self):
+        i = [self]
+        result = [self.val]
+        while i:
+            node = i.pop(0)
+            if node.left:
+                result.append(node.left.val)
+                i.append(node.left)
+            else:
+                result.append(None)
+            if node.right:
+                result.append(node.right.val)
+                i.append(node.right)
+            else:
+                result.append(None)
+        i = len(result)
+        # remove tailed None
+        while result[i-1] is None:
+            i -= 1
+        return str(result[:i])
+
 
 def concat_node(l: List) -> ListNode:
     head = ListNode(0)
@@ -34,7 +55,7 @@ def concat_node(l: List) -> ListNode:
 
 
 def concat_tree(l: List) -> TreeNode:
-    nodes = [TreeNode(x) for x in l]
+    nodes = [TreeNode(x) if x is not None else x for x in l]
     n = len(nodes)
     leaves = n // 2
     for i in range(n-leaves):
