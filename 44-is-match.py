@@ -16,40 +16,11 @@ import time
 
 class Solution:
 
-    def isMatch2(self, s: str, p: str) -> bool:
-        # 贪心算法， 普通DP超时
-        if s.count('*') == 0:
-            return self.easyMatch(s, p)
-        res = []
-        for each in p:
-            if each == '*' or each == '?':
-                if res and res[-1] == '*':
-                    continue
-            res.append(each)
-        p = ''.join(res)
-        index = p.find('*')
-        rindex = p.find('*')
-        if not self.easyMatch(s[:index], p[:index]):
-            return False
-        if not self.easyMatch(s[rindex+1:], p[len(p)-len(s)+rindex+1:]):
-            return False
-        s = s[index+1:len(s)-len(p)+rindex]
-        p = p[index+1:rindex]
-        return self.seq(s, p)
-
-    def easyMatch(self, s, p):
-        if len(s) != len(p):
-            return False
-        for i in range(len(s)):
-            if p[i] != '?' and p[i] != s[i]:
-                return False
-        return True
-
     def isMatch(self, s: str, p: str) -> bool:
         # group by *
         res = []
         for each in p:
-            if each == '*':
+            if each == '*' or each == '?':
                 if res and res[-1] == '*':
                     continue
             res.append(each)
