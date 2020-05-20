@@ -6,13 +6,16 @@ from tool import TreeNode, concat_tree
 请在不改变其结构的情况下，恢复这棵树。
 """
 
+# 直接中序遍历再将排序好的节点填回去即可获得O(n)空间的算法
+# TODO 这里使用了Morris遍历
+
 
 class Solution:
     def recoverTree(self, root: TreeNode) -> None:
         """
         Do not return anything, modify root in-place instead.
         """
-        # 直接中序遍历再将排序好的节点填回去即可获得O(n)空间的算法
+
         # 下面我们实现Morris Traversal方法
         cur = root
         # node1是错位的大值

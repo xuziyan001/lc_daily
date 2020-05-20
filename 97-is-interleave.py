@@ -1,3 +1,14 @@
+"""
+给定三个字符串 s1, s2, s3, 验证 s3 是否是由 s1 和 s2 交错组成的。
+"""
+"""
+这里明显可以用动态规划的思想解决
+dp(i,j)代表s1的前i位，s2的前j位，与s3的前i+j位的匹配关系
+dp（i+1，j） = dp（i，j） and s3[i+j+1] == s1[i+1] 或者 dp（i+1，j-1） and s3[i+j+1] == s2[j]
+dp（i，j+1）同理
+"""
+
+
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
         m = len(s1)
@@ -26,6 +37,23 @@ class Solution:
     def isInterleave2(self, s1: str, s2: str, s3: str) -> bool:
         remains = self.sub(s3, s1, 0, 0, '')
         return s2 in remains
+
+    # This is wrong answer
+    def isInterleave3(self, s1: str, s2: str, s3: str) -> bool:
+        m = len(s1)
+        n = len(s2)
+        if m + n != len(s3):
+            return False
+        i, j = 0, 0
+        while i != m:
+            if s1[i] == s3[j]:
+                i += 1
+                s3 = s3[:j] + s3[j+1:]
+            else:
+                j += 1
+            if j >= m+n:
+                return False
+        return s3 == s2
 
     def sub(self, s1, s2, i, j, remains):
         m = len(s1)
@@ -57,13 +85,15 @@ if __name__ == '__main__':
     s2 = "dbbca"
     s3 = "aadbbcbcac"
     print(Solution().isInterleave(s1,s2,s3))
+    print(Solution().isInterleave3(s1,s2,s3))
     s1 = "aabcc"
     s2 = "dbbca"
     s3 = "aadbbbaccc"
     print(Solution().isInterleave(s1,s2,s3))
+    print(Solution().isInterleave3(s1,s2,s3))
     s1= "cabbacccabacbcaabaccacacc"
     s2="bccacbacabbabaaacbbbbcbbcacc"
     s3="cbccacabbacabbbaacbcacaaacbbacbcaabbbbacbcbcacccacacc"
     print(Solution().isInterleave(s1,s2,s3))
-    #print(Solution().isInterleave(s1,s2,s3))
+    print(Solution().isInterleave3(s1,s2,s3))
 
