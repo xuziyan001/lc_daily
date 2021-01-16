@@ -1,9 +1,6 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+"""
+给定一个二叉树，返回它的中序 遍历。
+"""
 from typing import List
 from tool import TreeNode, concat_tree
 

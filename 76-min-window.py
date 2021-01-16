@@ -1,3 +1,11 @@
+"""
+给你一个字符串 S、一个字符串 T，请在字符串 S 里面找出：包含 T 所有字符的最小子串。
+"""
+
+"""
+采用滑动窗口的方法，统计囊括的字符的个数
+"""
+
 
 class Solution:
     def minWindow2(self, s: str, t: str) -> str:

@@ -5,6 +5,10 @@ from tool import ListNode, concat_node
 说明:
 1 ≤ m ≤ n ≤ 链表长度。
 """
+"""
+这里的思想是利用递归来模拟单向链表的后指针
+
+"""
 
 
 class Solution:

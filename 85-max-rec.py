@@ -1,7 +1,8 @@
 from typing import List
-
 """
-TODO 这道题的思维很有意思
+给定一个仅包含 0 和 1 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。
+"""
+"""
 给定一个最大矩形，其高为 h， 左边界 l，右边界 r，在矩形的底边，区间 [l, r]内必然存在一点，其上连续1的个数（高度）<=h。若该点存在，
 则由于边界内的高度必能容纳h，以上述方法定义的矩形会向上延伸到高度h，再左右扩展到边界 [l, r] ，于是该矩形就是最大矩形。
 
@@ -9,6 +10,7 @@ TODO 这道题的思维很有意思
 
 综上，对于每个点，只需要计算h， l，和 r - 矩形的高，左边界和右边界。
 """
+
 
 class Solution:
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
@@ -28,6 +30,7 @@ class Solution:
             cur_left, cur_right = -1, n
             for j in range(n):
                 if matrix[i][j] == '1':
+                    # 这里用了上一行的状态，保留了下来
                     left[j] = max(left[j], cur_left)
                 else:
                     left[j] = -1

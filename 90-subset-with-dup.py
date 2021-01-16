@@ -1,3 +1,11 @@
+"""
+给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+"""
+"""
+backtrace可以理解为要与不要第i个元素的所有子集
+"""
+
+
 from typing import List
 
 
@@ -13,7 +21,7 @@ class Solution:
                 current.pop()
         res = []
         s = set()
-        nums.sort()
+        nums.sort()  # 必须要排序
         n = len(nums)
         backtrace()
         return res
