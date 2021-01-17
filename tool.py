@@ -57,8 +57,9 @@ def concat_node(l: List) -> ListNode:
 def concat_tree(l: List) -> TreeNode:
     nodes = [TreeNode(x) if x is not None else x for x in l]
     n = len(nodes)
-    leaves = n // 2
-    for i in range(n-leaves):
+    for i in range(n // 2):
+        if not nodes[i]:
+            continue
         left = 2*i+1
         if left < n:
             nodes[i].left = nodes[left]

@@ -1,21 +1,25 @@
-# 给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+"""
+给定一个二叉树，找出其最大深度。
 
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+
+说明: 叶子节点是指没有子节点的节点。
+"""
 from typing import List
-
-import copy
 
 from tool import TreeNode, concat_tree
 
 
 class Solution:
-    def __init__(self):
-        self.total_result = []
 
-    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+    def __init__(self):
+        self.deepth = 0
+
+    def maxDepth(self, root: TreeNode) -> int:
         if not root:
-            return []
+            return 0
         self.bfs([root])
-        return self.total_result
+        return self.deepth
 
     def bfs(self, current_list: List[TreeNode]):
         if len(current_list) == 0:
@@ -30,7 +34,7 @@ class Solution:
                 leveled_node.append(current.left)
             if current.right:
                 leveled_node.append(current.right)
-        self.total_result.append(result)
+        self.deepth += 1
         current_list.extend(leveled_node)
         self.bfs(current_list)
 
@@ -38,14 +42,4 @@ class Solution:
 if __name__ == '__main__':
     t = concat_tree([3,9,20,None,None,15,7])
     s = Solution()
-    print(s.levelOrder(t))
-    t = concat_tree([None])
-    s = Solution()
-    print(s.levelOrder(t))
-    t = concat_tree([1])
-    s = Solution()
-    print(s.levelOrder(t))
-    t = concat_tree([1, 2, None, 3, None, None, None, 4, None, None, None, None, None, None, None, 5])
-    print(t)
-    s = Solution()
-    print(s.levelOrder(t))
+    print(s.maxDepth(t))
