@@ -25,38 +25,20 @@ class Solution:
         if not root:
             return []
         result = []
-        stack = []
-        stack.append(root)
-        layer = 0
+        def layered(layer_stack):
+            layer_list = list()
+            next_stack = list()
+            for each in layer_stack:
+                layer_list.append(each.val)
+                if each.left:
+                    next_stack.append(each.left)
+                if each.right:
+                    next_stack.append(each.right)
+            result.append(layer_list)
+            return next_stack
+        stack = [root]
         while stack:
-            r = stack[0]
-            result.append(r)
-            if r:
-                stack.append(r.left)
-                stack.append(r.right)
-            else:
-                stack.extend([None, None])
-
-
-
-
-
-    def levelOrderBottom2(self, root: TreeNode) -> List[List[int]]:
-        if not root:
-            return []
-        result = []
-        tmp = [root]
-        while len([x for x in tmp if x is not None]) != 0:
-            result.append([x.val for x in tmp if x is not None])
-            next_level = []
-            for each in tmp:
-                if each:
-                    next_level.append(each.left)
-                    next_level.append(each.right)
-                else:
-                    next_level.append(None)
-                    next_level.append(None)
-            tmp = next_level
+            stack = layered(stack)
         result.reverse()
         return result
 
