@@ -15,7 +15,7 @@ class Solution:
             return 0 if s != t else 1
         ls = len(s)
         lt = len(t)
-        result = [[0] * (ls+1) for i in range(lt+1)]
+        result = [[0] * (ls+1) for _ in range(lt+1)]
         for j in range(1, ls+1):
             result[1][j] = s[:j].count(t[0])
         for i in range(2, lt+1):
