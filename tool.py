@@ -9,9 +9,11 @@ class ListNode:
     def __str__(self):
         current = self
         result = ''
-        while current.next is not None:
+        count = 0
+        while current.next is not None and count < 20:
             result += str(current.val) + ','
             current = current.next
+            count += 1
         result += str(current.val)
         return result
 
@@ -54,6 +56,16 @@ def concat_node(l: List) -> ListNode:
     return head.next
 
 
+def get_node(head, index):
+    start = head
+    if index < -1:
+        return None
+    while index != 0:
+        start = start.next
+        index -= 1
+    return start
+
+
 def concat_tree(l: List) -> TreeNode:
     nodes = [TreeNode(x) if x is not None else x for x in l]
     n = len(nodes)
@@ -67,3 +79,8 @@ def concat_tree(l: List) -> TreeNode:
         if right < n:
             nodes[i].right = nodes[right]
     return nodes[0]
+
+
+def print_matrix(l: List[List[str]]):
+    for each in l:
+        print(''.join(each))

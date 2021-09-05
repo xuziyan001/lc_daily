@@ -16,6 +16,8 @@ from typing import List
 
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        if endWord not in wordList:
+            return 0
         return self.__dfs(beginWord, endWord, set(wordList))
 
     def __dfs(self, begin, end, word_set):
@@ -50,11 +52,13 @@ class Solution:
             if len(level_visited) == 0:
                 return 0
             visited |= level_visited
+            level_visited = set()
             layer += 1
         return layer
 
 
 if __name__ == '__main__':
+    print(Solution().ladderLength("hit","cog",["hot","dot","tog","cog"]))
     print(Solution().ladderLength("hit","cog",["hot","dot","dog","lot","log","cog"]))
     print(Solution().ladderLength("hit","cog",["hot","dot","dog","lot","log"]))
     print(Solution().ladderLength("qa","sq",["si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","av","sm","ar","ci","ca","br","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","fe","ho","ma","re","or","rn","au","ur","rh","sr","tc","lt","lo","as","fr","nb","yb","if","pb","ge","th","pm","rb","sh","co","ga","li","ha","hz","no","bi","di","hi","qa","pi","os","uh","wm","an","me","mo","na","la","st","er","sc","ne","mn","mi","am","ex","pt","io","be","fm","ta","tb","ni","mr","pa","he","lr","sq","ye"]))
